@@ -1013,6 +1013,8 @@ function askQuestion(q){
   sendChat();
 }
 
+const JARVIS_PROXY_URL = "https://jarvis-proxy.steveleehaines.workers.dev";
+
 async function sendChat(){
   const input = document.getElementById('chatInput');
   const msgs = document.getElementById('chatMessages');
@@ -1030,26 +1032,14 @@ async function sendChat(){
   msgs.innerHTML += `<div class="msg bot" id="${typingId}"><div class="msg-bubble"><span class="typing-dot">•</span><span class="typing-dot">•</span><span class="typing-dot">•</span></div></div>`;
   msgs.scrollTop = msgs.scrollHeight;
 
-  // Check for API key
-  const apiKey = window.ANTHROPIC_API_KEY || '';
-  if(!apiKey){
-    document.getElementById(typingId).outerHTML = `<div class="msg bot"><div class="msg-bubble">To activate live AI responses, add your Anthropic API key. For now, I can tell you that Joshua is a mechatronics engineer who built an autonomous mine-detection robot, programmed six-axis robot arms, and built his own local AI assistant. Check the sections above for full details! 🚀</div></div>`;
-    msgs.scrollTop = msgs.scrollHeight;
-    return;
-  }
-
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch(JARVIS_PROXY_URL, {
       method: 'POST',
-      headers: {'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
-      body: JSON.stringify({
-        model:'claude-sonnet-4-6', max_tokens:400,
-        system: CONTEXT,
-        messages:[{role:'user',content:q}]
-      })
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ message: q, system: CONTEXT })
     });
     const data = await res.json();
-    const reply = data.content?.[0]?.text || 'Sorry, I had trouble with that.';
+    const reply = data.reply || data.error || 'Sorry, I had trouble with that.';
     document.getElementById(typingId).outerHTML = `<div class="msg bot"><div class="msg-bubble">${escHtml(reply)}</div></div>`;
   } catch(e) {
     document.getElementById(typingId).outerHTML = `<div class="msg bot"><div class="msg-bubble">Something went wrong. Check the console for details.</div></div>`;
