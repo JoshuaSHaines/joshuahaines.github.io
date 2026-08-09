@@ -405,6 +405,18 @@ section { padding: 6rem 3rem; }
   transition: background .2s; flex-shrink: 0;
 }
 .chat-send:hover { background: #00e5d5; }
+.chat-mic, .chat-voice-toggle {
+  background: transparent; border: 1px solid var(--border); border-radius: 8px;
+  width: 36px; height: 36px; cursor: pointer; font-size: .9rem;
+  display: flex; align-items: center; justify-content: center; color: var(--white-dim);
+  transition: all .2s; flex-shrink: 0;
+}
+.chat-mic:hover, .chat-voice-toggle:hover { border-color: var(--teal); color: var(--teal); }
+.chat-mic.listening { background: var(--teal); color: #080D1A; border-color: var(--teal); animation: micPulse 1.2s infinite; }
+.chat-voice-toggle.active { border-color: var(--teal); color: var(--teal); }
+@keyframes micPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,229,213,.5); } 50% { box-shadow: 0 0 0 6px rgba(0,229,213,0); } }
+.msg-speak { background: none; border: none; color: var(--white-dim); cursor: pointer; font-size: .78rem; margin-top: .35rem; padding: 0; display: inline-flex; align-items: center; gap: .25rem; }
+.msg-speak:hover { color: var(--teal); }
 .chat-note { font-size: .68rem; color: var(--white-dim); padding: 0 1rem .75rem; text-align: center; line-height: 1.4; }
 
 /* ── CONTACT ─────────────────────────────────────────────────── */
@@ -900,10 +912,12 @@ canvas#circuit { position: absolute; inset: 0; width: 100%; height: 100%; }
     <button class="suggestion" onclick="askQuestion('What is Joshua looking for in a job?')">Job goals?</button>
   </div>
   <div class="chat-input-row">
+    <button class="chat-voice-toggle" id="voiceToggle" onclick="toggleVoiceOutput()" title="Toggle spoken replies">🔊</button>
     <input class="chat-input" id="chatInput" type="text" placeholder="Ask about Joshua..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-mic" id="micBtn" onclick="toggleMic()" title="Speak your question">🎤</button>
     <button class="chat-send" onclick="sendChat()">→</button>
   </div>
-  <div class="chat-note">⚡ Powered by Claude · Add your Anthropic API key to activate</div>
+  <div class="chat-note">⚡ Powered by Claude · 🎤 Tap the mic to talk, 🔊 to hear replies</div>
 </div>
 
 <script>
@@ -1041,6 +1055,7 @@ async function sendChat(){
     const data = await res.json();
     const reply = data.reply || data.error || 'Sorry, I had trouble with that.';
     document.getElementById(typingId).outerHTML = `<div class="msg bot"><div class="msg-bubble">${escHtml(reply)}</div></div>`;
+    speakText(reply);
   } catch(e) {
     document.getElementById(typingId).outerHTML = `<div class="msg bot"><div class="msg-bubble">Something went wrong. Check the console for details.</div></div>`;
   }
@@ -1048,6 +1063,62 @@ async function sendChat(){
 }
 
 function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* — VOICE: speech-to-text + text-to-speech — */
+let voiceOutputOn = false;
+let recognition = null;
+let listening = false;
+
+function toggleVoiceOutput(){
+  voiceOutputOn = !voiceOutputOn;
+  document.getElementById('voiceToggle').classList.toggle('active', voiceOutputOn);
+  if(!voiceOutputOn) window.speechSynthesis?.cancel();
+}
+
+function speakText(text){
+  if(!voiceOutputOn || !('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.rate = 1.0;
+  utter.pitch = 0.9;
+  window.speechSynthesis.speak(utter);
+}
+
+function toggleMic(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){
+    alert('Voice input isn\'t supported in this browser — try Chrome or Edge.');
+    return;
+  }
+  const micBtn = document.getElementById('micBtn');
+  if(listening){
+    recognition?.stop();
+    return;
+  }
+  recognition = new SR();
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  recognition.onstart = () => {
+    listening = true;
+    micBtn.classList.add('listening');
+  };
+  recognition.onend = () => {
+    listening = false;
+    micBtn.classList.remove('listening');
+  };
+  recognition.onerror = () => {
+    listening = false;
+    micBtn.classList.remove('listening');
+  };
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    document.getElementById('chatInput').value = transcript;
+    sendChat();
+  };
+  recognition.start();
+}
 
 function downloadResume(e){
   e.preventDefault();
