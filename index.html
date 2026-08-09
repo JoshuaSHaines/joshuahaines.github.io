@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joshua Haines — Mechatronics & Robotics Engineer</title>
+<meta name="description" content="Mechatronics & Robotics Engineering student at LeTourneau University. 3+ years industrial automation experience at Linestar Automation. Builds autonomous robots, FPGA systems, and local AI. May 2027.">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Joshua Haines",
+  "jobTitle": "Mechatronics Engineering Student & Automation Intern",
+  "email": "JoshuaHaines@letu.edu",
+  "url": "https://joshuahaines.dev",
+  "sameAs": ["https://linkedin.com/in/joshuastephenhaines"],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "LeTourneau University",
+    "address": {"@type": "PostalAddress", "addressLocality": "Longview", "addressRegion": "TX"}
+  },
+  "knowsAbout": ["Mechatronics Engineering", "Industrial Automation", "Robotics", "Embedded Systems", "FPGA Design", "CAN Bus", "Beckhoff TwinCAT", "Universal Robots", "Artificial Intelligence", "PLC Programming"],
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": "Mechatronics Engineering Intern",
+    "occupationLocation": {"@type": "City", "name": "Austin, TX"}
+  },
+  "award": ["Presidential Scholarship — LeTourneau University", "Fall 2023 President's List", "UR e-Series Core Track Certificate", "UR e-Series Pro Track Certificate"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ──────────────────────────────────────────────────── */
+:root {
+  --bg:        #080D1A;
+  --bg2:       #0D1426;
+  --bg3:       #121930;
+  --teal:      #00C9BB;
+  --teal-dim:  #007A72;
+  --amber:     #FFB347;
+  --white:     #EEF2FF;
+  --white-dim: #8892A4;
+  --navy:      #1B3A5C;
+  --card:      #0F1729;
+  --border:    rgba(0,201,187,0.15);
+  --font-disp: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ── RESET ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--teal); text-decoration: none; }
+a:hover { color: #fff; }
+
+/* ── NAV ─────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 3rem;
+  background: rgba(8,13,26,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: all .3s;
+}
+.nav-logo {
+  font-family: var(--font-disp);
+  font-weight: 700; font-size: 1.1rem;
+  color: var(--white); letter-spacing: .5px;
+}
+.nav-logo span { color: var(--teal); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: .85rem; font-weight: 500; color: var(--white-dim); letter-spacing: .5px; text-transform: uppercase; transition: color .2s; }
+.nav-links a:hover { color: var(--teal); }
+
+/* ── HERO ────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 8rem 3rem 4rem;
+  position: relative; overflow: hidden;
+}
+.hero-canvas {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: .25; pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: .8rem; color: var(--teal);
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  opacity: 0; transform: translateY(10px);
+  animation: fadeUp .6s .3s ease forwards;
+}
+.hero-name {
+  font-family: var(--font-disp);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700; line-height: .95;
+  letter-spacing: -2px;
+  color: var(--white);
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp .7s .5s ease forwards;
+}
+.hero-name .accent { color: var(--teal); }
+.hero-tagline {
+  margin-top: 1.5rem;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--white-dim); font-weight: 300;
+  max-width: 600px; line-height: 1.5;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp .7s .7s ease forwards;
+}
+.hero-ctas {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  margin-top: 2.5rem;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp .7s .9s ease forwards;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .75rem 1.75rem;
+  border-radius: 4px;
+  font-family: var(--font-disp); font-weight: 600; font-size: .9rem;
+  cursor: pointer; transition: all .2s; border: none;
+}
+.btn-primary { background: var(--teal); color: #080D1A; }
+.btn-primary:hover { background: #00e5d5; color: #080D1A; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,201,187,.3); }
+.btn-outline { background: transparent; color: var(--white); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+.hero-stats {
+  display: flex; gap: 3rem; flex-wrap: wrap;
+  margin-top: 4rem; padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp .7s 1.1s ease forwards;
+}
+.stat-num {
+  font-family: var(--font-disp); font-size: 2.2rem; font-weight: 700; color: var(--white);
+}
+.stat-num span { color: var(--teal); }
+.stat-label { font-size: .8rem; color: var(--white-dim); letter-spacing: 1px; text-transform: uppercase; margin-top: .2rem; }
+.scroll-hint {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .4rem;
+  opacity: 0; animation: fadeUp .7s 1.4s ease forwards;
+}
+.scroll-hint span { font-size: .7rem; color: var(--white-dim); letter-spacing: 2px; text-transform: uppercase; }
+.scroll-line {
+  width: 1px; height: 48px; background: linear-gradient(var(--teal), transparent);
+  animation: scrollPulse 2s 1.5s ease-in-out infinite;
+}
+
+/* ── SECTION COMMONS ─────────────────────────────────────────── */
+section { padding: 6rem 3rem; }
+.section-eyebrow {
+  font-family: var(--font-mono); font-size: .75rem;
+  color: var(--teal); letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: .75rem;
+}
+.section-title {
+  font-family: var(--font-disp); font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700; line-height: 1.1; margin-bottom: 1rem;
+  color: var(--white);
+}
+.section-sub { font-size: 1rem; color: var(--white-dim); max-width: 600px; line-height: 1.7; }
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── ABOUT ───────────────────────────────────────────────────── */
+#about { background: var(--bg2); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+.about-text p { color: var(--white-dim); line-height: 1.8; margin-bottom: 1rem; font-size: .95rem; }
+.about-text p strong { color: var(--white); }
+.about-badges { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+.badge {
+  font-family: var(--font-mono); font-size: .7rem;
+  padding: .3rem .75rem; border-radius: 100px;
+  border: 1px solid var(--border); color: var(--teal);
+  background: rgba(0,201,187,.05);
+}
+.about-highlights { display: flex; flex-direction: column; gap: 1.2rem; }
+.highlight-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 1.25rem 1.5rem;
+  transition: border-color .2s, transform .2s;
+}
+.highlight-card:hover { border-color: var(--teal); transform: translateX(4px); }
+.hl-icon { font-size: 1.3rem; margin-bottom: .5rem; }
+.hl-title { font-family: var(--font-disp); font-weight: 600; font-size: .9rem; color: var(--white); margin-bottom: .25rem; }
+.hl-desc { font-size: .82rem; color: var(--white-dim); line-height: 1.5; }
+
+/* ── EXPERIENCE TIMELINE ─────────────────────────────────────── */
+#experience { background: var(--bg); }
+.timeline { margin-top: 3rem; position: relative; }
+.timeline::before {
+  content: ''; position: absolute; left: 160px; top: 0; bottom: 0;
+  width: 1px; background: linear-gradient(var(--teal), transparent);
+}
+.timeline-item { display: flex; gap: 3rem; margin-bottom: 3rem; position: relative; }
+.timeline-date {
+  min-width: 140px; text-align: right;
+  font-family: var(--font-mono); font-size: .75rem;
+  color: var(--teal); line-height: 1.4; padding-top: .15rem;
+}
+.timeline-dot {
+  position: absolute; left: 153px; top: .3rem;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--teal);
+  flex-shrink: 0; z-index: 1;
+  transition: background .2s;
+}
+.timeline-item:hover .timeline-dot { background: var(--teal); }
+.timeline-content { flex: 1; }
+.tl-role { font-family: var(--font-disp); font-weight: 600; font-size: 1rem; color: var(--white); margin-bottom: .2rem; }
+.tl-org { font-size: .82rem; color: var(--teal); margin-bottom: .75rem; font-weight: 500; }
+.tl-bullets { list-style: none; }
+.tl-bullets li {
+  font-size: .85rem; color: var(--white-dim); line-height: 1.6;
+  padding: .2rem 0 .2rem 1.2rem; position: relative;
+}
+.tl-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--teal-dim); }
+
+/* ── PROJECTS ────────────────────────────────────────────────── */
+#projects { background: var(--bg2); }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+.project-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.75rem;
+  transition: all .3s; cursor: default; position: relative; overflow: hidden;
+}
+.project-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,201,187,.06) 0%, transparent 60%);
+  opacity: 0; transition: opacity .3s;
+}
+.project-card:hover { border-color: var(--teal); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.4); }
+.project-card:hover::before { opacity: 1; }
+.pc-tag {
+  font-family: var(--font-mono); font-size: .68rem;
+  color: var(--teal); letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: .75rem;
+}
+.pc-tag.amber { color: var(--amber); }
+.pc-title { font-family: var(--font-disp); font-weight: 700; font-size: 1.15rem; color: var(--white); margin-bottom: .6rem; line-height: 1.2; }
+.pc-desc { font-size: .85rem; color: var(--white-dim); line-height: 1.65; margin-bottom: 1rem; }
+.pc-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.chip {
+  font-family: var(--font-mono); font-size: .67rem;
+  padding: .2rem .6rem; border-radius: 4px;
+  background: rgba(0,201,187,.08); color: var(--teal);
+  border: 1px solid rgba(0,201,187,.2);
+}
+.chip.amber { background: rgba(255,179,71,.08); color: var(--amber); border-color: rgba(255,179,71,.2); }
+.pc-featured {
+  border-color: rgba(0,201,187,.4);
+  background: linear-gradient(135deg, rgba(0,201,187,.05), var(--card));
+}
+
+/* ── SKILLS ─────────────────────────────────────────────────── */
+#skills { background: var(--bg); }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+.skill-group {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.4rem;
+  transition: border-color .2s;
+}
+.skill-group:hover { border-color: rgba(0,201,187,.4); }
+.sg-icon { font-size: 1.5rem; margin-bottom: .6rem; }
+.sg-label { font-family: var(--font-disp); font-weight: 600; font-size: .85rem; color: var(--white); margin-bottom: .6rem; text-transform: uppercase; letter-spacing: .5px; }
+.sg-items { display: flex; flex-wrap: wrap; gap: .35rem; }
+.sg-item {
+  font-family: var(--font-mono); font-size: .68rem;
+  padding: .18rem .55rem; border-radius: 3px;
+  background: rgba(255,255,255,.04); color: var(--white-dim);
+  border: 1px solid rgba(255,255,255,.07);
+}
+
+/* ── JARVIS ──────────────────────────────────────────────────── */
+#jarvis { background: var(--bg2); }
+.jarvis-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center; margin-top: 3rem;
+}
+.jarvis-visual {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  min-height: 320px;
+}
+.jarvis-ring {
+  width: 260px; height: 260px; border-radius: 50%;
+  border: 1px solid rgba(255,179,71,.2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  animation: ringPulse 4s ease-in-out infinite;
+}
+.jarvis-ring::before, .jarvis-ring::after {
+  content: ''; position: absolute; border-radius: 50%; border: 1px solid rgba(255,179,71,.1);
+}
+.jarvis-ring::before { width: 200px; height: 200px; animation: ringPulse 4s 1s ease-in-out infinite; }
+.jarvis-ring::after { width: 300px; height: 300px; animation: ringPulse 4s 2s ease-in-out infinite; }
+.jarvis-core {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,179,71,.15), rgba(255,179,71,.03));
+  border: 1px solid rgba(255,179,71,.4);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-disp); font-size: 2rem; font-weight: 700; color: var(--amber);
+  animation: corePulse 3s ease-in-out infinite;
+}
+.jarvis-text { }
+.jarvis-text .section-title { color: var(--amber); }
+.jarvis-text p { font-size: .9rem; color: var(--white-dim); line-height: 1.75; margin-bottom: 1rem; }
+.jarvis-text p strong { color: var(--white); }
+.jarvis-stack { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1.2rem; }
+.jarvis-chip {
+  font-family: var(--font-mono); font-size: .7rem;
+  padding: .25rem .7rem; border-radius: 4px;
+  background: rgba(255,179,71,.08); color: var(--amber);
+  border: 1px solid rgba(255,179,71,.2);
+}
+
+/* ── CHAT ────────────────────────────────────────────────────── */
+.chat-fab {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+  width: 58px; height: 58px; border-radius: 50%;
+  background: var(--teal); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; color: #080D1A;
+  box-shadow: 0 4px 24px rgba(0,201,187,.4);
+  transition: all .2s; animation: fabPop 1s 2s ease both;
+}
+.chat-fab:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(0,201,187,.5); }
+.chat-panel {
+  position: fixed; bottom: 6rem; right: 2rem; z-index: 200;
+  width: 360px; max-height: 520px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 60px rgba(0,0,0,.6);
+  transform: scale(.9) translateY(20px); opacity: 0;
+  transition: all .3s cubic-bezier(.34,1.56,.64,1);
+  pointer-events: none;
+}
+.chat-panel.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+.chat-header {
+  background: linear-gradient(135deg, var(--teal-dim), rgba(0,150,140,.8));
+  padding: 1rem 1.25rem; display: flex; align-items: center; gap: .75rem;
+}
+.chat-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(0,0,0,.3);
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
+  flex-shrink: 0;
+}
+.chat-header-text h4 { font-family: var(--font-disp); font-size: .9rem; font-weight: 600; color: #fff; }
+.chat-header-text p { font-size: .72rem; color: rgba(255,255,255,.7); }
+.chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .75rem; }
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.msg { max-width: 85%; }
+.msg.bot { align-self: flex-start; }
+.msg.user { align-self: flex-end; }
+.msg-bubble {
+  padding: .6rem .9rem; border-radius: 12px;
+  font-size: .82rem; line-height: 1.5;
+}
+.bot .msg-bubble { background: var(--card); color: var(--white-dim); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+.user .msg-bubble { background: var(--teal); color: #080D1A; font-weight: 500; border-bottom-right-radius: 4px; }
+.chat-suggestions { display: flex; flex-wrap: wrap; gap: .4rem; padding: 0 1rem .5rem; }
+.suggestion {
+  font-size: .72rem; padding: .3rem .7rem; border-radius: 100px;
+  border: 1px solid var(--border); color: var(--teal); background: transparent;
+  cursor: pointer; transition: all .2s; font-family: var(--font-body);
+}
+.suggestion:hover { background: var(--teal); color: #080D1A; border-color: var(--teal); }
+.chat-input-row {
+  display: flex; gap: .5rem; padding: .75rem 1rem;
+  border-top: 1px solid var(--border);
+}
+.chat-input {
+  flex: 1; background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: .5rem .75rem;
+  color: var(--white); font-family: var(--font-body); font-size: .82rem;
+  outline: none; transition: border-color .2s;
+}
+.chat-input:focus { border-color: var(--teal); }
+.chat-input::placeholder { color: var(--white-dim); }
+.chat-send {
+  background: var(--teal); border: none; border-radius: 8px;
+  width: 36px; height: 36px; cursor: pointer; font-size: .9rem;
+  display: flex; align-items: center; justify-content: center; color: #080D1A;
+  transition: background .2s; flex-shrink: 0;
+}
+.chat-send:hover { background: #00e5d5; }
+.chat-note { font-size: .68rem; color: var(--white-dim); padding: 0 1rem .75rem; text-align: center; line-height: 1.4; }
+
+/* ── CONTACT ─────────────────────────────────────────────────── */
+#contact {
+  background: var(--bg);
+  text-align: center;
+}
+.contact-inner { max-width: 600px; margin: 0 auto; }
+.contact-inner .section-title { font-size: clamp(1.6rem, 4vw, 2.4rem); }
+.contact-inner .section-sub { margin: 1rem auto 2rem; }
+.contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+.contact-link {
+  display: flex; align-items: center; gap: .5rem;
+  padding: .7rem 1.4rem; border: 1px solid var(--border);
+  border-radius: 8px; color: var(--white-dim); font-size: .85rem;
+  transition: all .2s;
+}
+.contact-link:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+footer {
+  background: var(--bg2); padding: 2rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid var(--border); font-size: .78rem; color: var(--white-dim);
+}
+footer span { font-family: var(--font-mono); }
+
+/* ── ANIMATIONS ──────────────────────────────────────────────── */
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes scrollPulse { 0%,100% { opacity: .6; } 50% { opacity: 1; } }
+@keyframes ringPulse { 0%,100% { transform: scale(1); opacity: .6; } 50% { transform: scale(1.04); opacity: 1; } }
+@keyframes corePulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,179,71,.3); } 50% { box-shadow: 0 0 32px 8px rgba(255,179,71,.15); } }
+@keyframes fabPop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes typing { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+.typing-dot { display: inline-block; animation: typing 1s ease-in-out infinite; }
+.typing-dot:nth-child(2) { animation-delay: .2s; }
+.typing-dot:nth-child(3) { animation-delay: .4s; }
+
+/* ── CANVAS CIRCUIT ──────────────────────────────────────────── */
+canvas#circuit { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .hero { padding: 7rem 1.5rem 3rem; }
+  .about-grid, .jarvis-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .timeline::before { left: 0; }
+  .timeline-item { flex-direction: column; padding-left: 1.5rem; }
+  .timeline-date { min-width: unset; text-align: left; }
+  .timeline-dot { left: -7px; }
+  .hero-stats { gap: 2rem; }
+  .chat-panel { width: calc(100vw - 2rem); right: 1rem; bottom: 5.5rem; }
+  footer { flex-direction: column; gap: .5rem; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">J<span>.</span>Haines</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#jarvis">J.A.R.V.I.S.</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <canvas id="circuit" class="hero-canvas"></canvas>
+  <div class="hero-eyebrow">// Mechatronics · Robotics · Automation · AI</div>
+  <h1 class="hero-name">Joshua<br><span class="accent">Haines</span></h1>
+  <p class="hero-tagline">I build things that move, think, and perform — and then I make them smarter. From reverse-engineering CAN bus protocols and programming six-axis robot arms to building my own local AI voice assistant.</p>
+  <div class="hero-ctas">
+    <a href="#projects" class="btn btn-primary">View Projects →</a>
+    <a href="mailto:JoshuaHaines@letu.edu" class="btn btn-outline">Get in Touch</a>
+    <a href="#" class="btn btn-outline" onclick="downloadResume(event)">Download Resume ↓</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">3<span>+</span></div>
+      <div class="stat-label">Years at Linestar</div>
+    </div>
+    <div>
+      <div class="stat-num">3<span>.</span>57</div>
+      <div class="stat-label">GPA · Presidential Scholar</div>
+    </div>
+    <div>
+      <div class="stat-num">8<span>+</span></div>
+      <div class="stat-label">Major Projects Shipped</div>
+    </div>
+    <div>
+      <div class="stat-num">May<br><span style="font-size:1.4rem">2027</span></div>
+      <div class="stat-label">Graduating</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="fade-in">
+    <div class="section-eyebrow">// 01 — About</div>
+    <h2 class="section-title">Full-Stack<br>Mechatronics Engineer</h2>
+  </div>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>I'm a <strong>Mechatronics, Robotics & Automation Engineering</strong> student at LeTourneau University (Longview, TX), graduating May 2027 with a 3.57 GPA and a Presidential Scholarship.</p>
+      <p>Since Summer 2024, I've been a recurring engineering intern at <strong>Linestar Automation</strong> in Austin — working across three summers and two winters on real industrial automation projects, not classroom exercises. Confidential R&D, CAN bus reverse engineering, Beckhoff TwinCAT3 PLC/HMI systems, robotic integration, and panel fabrication.</p>
+      <p>Outside of Linestar, I build things for myself: an <strong>autonomous mine-detection robot</strong>, an <strong>FPGA arcade console with a custom PCB</strong>, an <strong>industry-sponsored electric motor project</strong>, and a <strong>local AI voice assistant</strong> I run on my own hardware — no cloud, no dependency, full control.</p>
+      <p>I'm looking for full-time roles in robotics, industrial automation, or embedded systems engineering where <strong>physical systems and AI intersect</strong>.</p>
+      <div class="about-badges">
+        <span class="badge">LeTourneau University</span>
+        <span class="badge">UR e-Series Core & Pro</span>
+        <span class="badge">Presidential Scholar</span>
+        <span class="badge">Fall 2023 President's List</span>
+      </div>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-card">
+        <div class="hl-icon">🤖</div>
+        <div class="hl-title">Industrial Automation (Linestar, 3 yrs)</div>
+        <div class="hl-desc">Beckhoff TwinCAT3 · CAN Bus / J1939 · EtherCAT · UR3e Cobots · HIWIN Motion · Panel Fabrication · PLC/HMI Development</div>
+      </div>
+      <div class="highlight-card">
+        <div class="hl-icon">⚡</div>
+        <div class="hl-title">Embedded Systems & FPGA</div>
+        <div class="hl-desc">ESP32 · Arduino · ARM Cortex-M0+ · Xilinx Basys 3 · VHDL · KiCad PCB Design · Analog/Mixed-Signal Circuits</div>
+      </div>
+      <div class="highlight-card">
+        <div class="hl-icon">🧠</div>
+        <div class="hl-title">AI & Software</div>
+        <div class="hl-desc">Ollama · Local LLM Orchestration · Python (data automation) · C/C++ · Structured Text · Git · Shell Scripting · State-Machine Architecture</div>
+      </div>
+      <div class="highlight-card">
+        <div class="hl-icon">🛠️</div>
+        <div class="hl-title">Mechanical & CAD</div>
+        <div class="hl-desc">Onshape · 3D Printing · Drivetrain Design · Mechanical Suspension Systems · Laser Cutting · BOM / RFQ Management</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="fade-in">
+    <div class="section-eyebrow">// 02 — Experience</div>
+    <h2 class="section-title">Linestar Automation</h2>
+    <p class="section-sub">Recurring Mechatronics Engineering Intern · Austin, TX · May 2024 – Present<br>3 summers + 2 winters — not support work, real engineering on real client deliverables.</p>
+  </div>
+  <div class="timeline fade-in">
+    <div class="timeline-item">
+      <div class="timeline-date">Summer<br>2026</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="tl-role">Beckhoff TwinCAT3 / PLC & HMI Development</div>
+        <div class="tl-org">Industrial Automation · Multiple Client Projects</div>
+        <ul class="tl-bullets">
+          <li>Implemented WLED lighting control via JSON API + UDP on Beckhoff TwinCAT3 platform</li>
+          <li>Developed HMI in TwinCAT3 and Maple Systems EBPro — web visualization, manual control pages, LED management</li>
+          <li>Drafted safety schematics: light curtains, safety relays, robot controller expansion ports</li>
+          <li>Maintained schematics for Keyence controllers, PEAK safety systems, magnetic door locks</li>
+          <li>Performed motor torque/mass/inertia calculations to evaluate Beckhoff servo options (ASI8114/AMI8122)</li>
+          <li>Researched Rockwell 755T drives + Logix 5000 PLC for dual-motor gantry syncing</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Summer<br>2025</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="tl-role">Confidential R&D Project — CAN Bus / Autonomous Systems</div>
+        <div class="tl-org">Early-Stage Automation · Collaborating Directly with Lead Engineer & Leadership</div>
+        <ul class="tl-bullets">
+          <li>Reverse-engineered an existing control system and analyzed J1939 CAN bus protocols to enable autonomous integration into legacy subsystems</li>
+          <li>Researched and evaluated critical components — comparison spreadsheets, feasibility analyses, and RFQs that guided hardware decisions</li>
+          <li>Built multiple fully functional prototypes significantly accelerating development</li>
+          <li>Authored 6 detailed technical reports earning positive feedback from contracting engineer</li>
+          <li>Created wiring schematics and block diagrams from scratch; developed CAD enclosure layouts, BOMs, and RFQs for fabrication phase</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Winter<br>2024–25</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="tl-role">HIWIN Motion Control / EtherCAT Integration</div>
+        <div class="tl-org">Client Project Under NDA</div>
+        <ul class="tl-bullets">
+          <li>Troubleshot HIWIN motion controller and motor drive; coordinated with HIWIN tech support and successfully executed firmware fix/update</li>
+          <li>Researched EtherCAT compatibility (CoE vs. MoE protocols); configured multi-motion absolute position commands</li>
+          <li>Trained on RedLion Crimson; finalized panel schematics and performed physical panel fabrication</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Summer<br>2024</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="tl-role">UR3e Robotic Systems & Motor Control Demo</div>
+        <div class="tl-org">Trescal DMM Testing Systems + NDA Client Projects</div>
+        <ul class="tl-bullets">
+          <li>Built and wired two complete robotic DMM testing systems for Trescal — robot control enclosures, main enclosures, system frames, UR3e cobot integration</li>
+          <li>Programmed Teknic ClearCore controller + ClearPath servo in C++ for motor control demo station</li>
+          <li>Wired industrial control panels and edited complex electrical schematics for multiple NDA client projects; adhered to UL safety standards</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="fade-in">
+    <div class="section-eyebrow">// 03 — Projects</div>
+    <h2 class="section-title">Things I've Built</h2>
+    <p class="section-sub">From industry-sponsored motor research to autonomous robots and custom PCBs — these are real shipped projects, not concept work.</p>
+  </div>
+  <div class="projects-grid fade-in">
+
+    <div class="project-card pc-featured">
+      <div class="pc-tag">⭐ Industry-Sponsored · Senior Design</div>
+      <div class="pc-title">Verso Motor Project</div>
+      <div class="pc-desc">Two-semester industry-sponsored project for MµZ Motion LLC — a startup developing a lightweight, high-torque electric motor. On a 10-person team, I served as Electrical Sub-Team Member, building custom test fixtures to generate experimentally validated core material data. Wrote a Python script to automate data processing. Handled proprietary client IP throughout.</div>
+      <div class="pc-chips">
+        <span class="chip">Python</span><span class="chip">Arduino</span><span class="chip">Circuit Design</span><span class="chip">Sensor Integration</span><span class="chip">Data Analysis</span><span class="chip">CAD</span><span class="chip">Technical Reports</span>
+      </div>
+    </div>
+
+    <div class="project-card pc-featured">
+      <div class="pc-tag">⭐ Autonomous Robot · Spring 2026</div>
+      <div class="pc-title">MineYourStep — Mine-Detection Robot</div>
+      <div class="pc-desc">4-wheel fully autonomous ground robot: sweeps a field, detects buried metal via dual induction-balance coils, centers over the target using dual-coil triangulation logic, and lowers a spinning detonation dome. I owned the entire electrical system — from component selection and AutoCAD wiring schematics to all ESP32 firmware including the complete autonomous state machine.</div>
+      <div class="pc-chips">
+        <span class="chip">ESP32</span><span class="chip">Firmware</span><span class="chip">AutoCAD</span><span class="chip">Induction Sensing</span><span class="chip">State Machine</span><span class="chip">3D Printing</span><span class="chip">BOM</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="pc-tag">FPGA · Spring 2025</div>
+      <div class="pc-title">FPGA Arcade Console</div>
+      <div class="pc-desc">Self-contained arcade console with a Xilinx Basys 3 FPGA implementing Tic-Tac-Toe in VHDL — with joystick input, 8×8 LED matrix display, a custom KiCad PCB, laser-cut wooden enclosure, and custom vinyl graphics. Full hardware stack from schematic to finished playable product (~80 hrs VHDL).</div>
+      <div class="pc-chips">
+        <span class="chip">VHDL</span><span class="chip">FPGA</span><span class="chip">KiCad PCB</span><span class="chip">Laser Cutting</span><span class="chip">Analog Circuits</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="pc-tag">Robotics · Spring 2026</div>
+      <div class="pc-title">R12-6 Six-Axis Robot Arm</div>
+      <div class="pc-desc">Programmed a Stäubli-style R12-6 industrial arm through a progressive lab series, culminating in a sensor-guided autonomous pick-and-place task. Implemented and compared two independent localization strategies using an external distance sensor. Wrote full coordinate-frame transformation math.</div>
+      <div class="pc-chips">
+        <span class="chip">Robot Programming</span><span class="chip">Kinematics</span><span class="chip">Sensor Localization</span><span class="chip">Webots</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="pc-tag">Mechatronics · Fall 2025</div>
+      <div class="pc-title">PID-Controlled Speed Vehicle</div>
+      <div class="pc-desc">Electric vehicle with closed-loop PID speed control maintaining constant velocity regardless of incline. Arduino Nano Every reads Hall-effect tachometer and runs PID with anti-windup compensation. Three switchable modes demonstrate controller performance.</div>
+      <div class="pc-chips">
+        <span class="chip">PID Control</span><span class="chip">Arduino</span><span class="chip">Hall-Effect</span><span class="chip">Motor Control</span><span class="chip">3D Printing</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="pc-tag">School · 2024</div>
+      <div class="pc-title">Arduino Laser Tag System</div>
+      <div class="pc-desc">IR-based laser tag guns and reactive target system built with a team of 3. Programmed C++ logic for shot tracking, health counters, animations, and sound effects. Designed most of the supporting circuitry.</div>
+      <div class="pc-chips">
+        <span class="chip">Arduino</span><span class="chip">C++</span><span class="chip">IR Sensing</span><span class="chip">Circuit Design</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="pc-tag amber">Personal · Wearable Tech</div>
+      <div class="pc-title">Motorized Shoe Mobility Device</div>
+      <div class="pc-desc">Prototypes for a wearable electric mobility device with dual-spring mechanical suspension calibrated for 1/4 body weight per spring, 6S battery traction system, custom belt/pulley drivetrain, and ESP32 real-time motor control with telemetry. Parametric CAD in Onshape.</div>
+      <div class="pc-chips">
+        <span class="chip amber">ESP32</span><span class="chip amber">6S LiPo</span><span class="chip amber">Drivetrain</span><span class="chip amber">Suspension</span><span class="chip amber">Onshape</span>
+      </div>
+    </div>
+
+    <div class="project-card" id="jarvis-card">
+      <div class="pc-tag amber">Personal · AI</div>
+      <div class="pc-title">J.A.R.V.I.S. — Local AI Voice Daemon</div>
+      <div class="pc-desc">Low-latency, privacy-focused AI voice assistant running as a Linux system daemon using Ollama for local LLM orchestration. Zero cloud dependency — all compute runs on local hardware. Full voice pipeline with custom systemd service management.</div>
+      <div class="pc-chips">
+        <span class="chip amber">Ollama</span><span class="chip amber">Python</span><span class="chip amber">Linux Daemon</span><span class="chip amber">Local LLM</span><span class="chip amber">Shell Scripting</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="pc-tag">Personal · Hardware</div>
+      <div class="pc-title">Articulated Iron Man MK5 Helmet</div>
+      <div class="pc-desc">Fully articulated helmet with 10 independently moving face plate segments and illuminated eyes. Arduino-based electrical system for servo actuation and LED control — complete mechanical and electrical integration from scratch.</div>
+      <div class="pc-chips">
+        <span class="chip">Arduino</span><span class="chip">Servos</span><span class="chip">3D Printing</span><span class="chip">Electronics</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="fade-in">
+    <div class="section-eyebrow">// 04 — Skills</div>
+    <h2 class="section-title">Technical Stack</h2>
+    <p class="section-sub">Built across real industrial projects, university coursework, and personal builds — not just listed, actually used.</p>
+  </div>
+  <div class="skills-grid fade-in">
+    <div class="skill-group">
+      <div class="sg-icon">🤖</div>
+      <div class="sg-label">Industrial Robotics</div>
+      <div class="sg-items">
+        <span class="sg-item">Universal Robots UR3e</span>
+        <span class="sg-item">EPSON VT6</span>
+        <span class="sg-item">Stäubli R12-6</span>
+        <span class="sg-item">PolyScope</span>
+        <span class="sg-item">EPSON RC+ / SPEL+</span>
+        <span class="sg-item">RoboDK</span>
+        <span class="sg-item">Webots</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">🔧</div>
+      <div class="sg-label">PLC / HMI</div>
+      <div class="sg-items">
+        <span class="sg-item">Beckhoff TwinCAT3</span>
+        <span class="sg-item">Structured Text</span>
+        <span class="sg-item">Maple Systems EBPro</span>
+        <span class="sg-item">TwinCAT HMI</span>
+        <span class="sg-item">RedLion Crimson</span>
+        <span class="sg-item">Web Visualization</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">⚡</div>
+      <div class="sg-label">Embedded Systems</div>
+      <div class="sg-items">
+        <span class="sg-item">ESP32</span>
+        <span class="sg-item">Arduino</span>
+        <span class="sg-item">ARM Cortex-M0+</span>
+        <span class="sg-item">NXP K32L2B31</span>
+        <span class="sg-item">MCUXpresso IDE</span>
+        <span class="sg-item">Xilinx Basys 3 FPGA</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">📡</div>
+      <div class="sg-label">Protocols & Networks</div>
+      <div class="sg-items">
+        <span class="sg-item">J1939 CAN Bus</span>
+        <span class="sg-item">EtherCAT (CoE/MoE)</span>
+        <span class="sg-item">UDP/IP · TCP/IP</span>
+        <span class="sg-item">JSON API</span>
+        <span class="sg-item">canAnalyser 3</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">🎛️</div>
+      <div class="sg-label">Motion Control</div>
+      <div class="sg-items">
+        <span class="sg-item">HIWIN iA Studio</span>
+        <span class="sg-item">HIWIN Thunder</span>
+        <span class="sg-item">Teknic ClearCore</span>
+        <span class="sg-item">PID Control</span>
+        <span class="sg-item">PWM Motor Drivers</span>
+        <span class="sg-item">Beckhoff Servo Drives</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">💻</div>
+      <div class="sg-label">Programming</div>
+      <div class="sg-items">
+        <span class="sg-item">C / C++</span>
+        <span class="sg-item">Python</span>
+        <span class="sg-item">VHDL</span>
+        <span class="sg-item">Embedded C</span>
+        <span class="sg-item">MATLAB</span>
+        <span class="sg-item">Java</span>
+        <span class="sg-item">Shell Scripting</span>
+        <span class="sg-item">Git</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">🧠</div>
+      <div class="sg-label">AI / Local LLM</div>
+      <div class="sg-items">
+        <span class="sg-item">Ollama</span>
+        <span class="sg-item">Local LLM Orchestration</span>
+        <span class="sg-item">AI Workflow Design</span>
+        <span class="sg-item">Systemd Daemon</span>
+        <span class="sg-item">SLM Inference</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-icon">🔌</div>
+      <div class="sg-label">EE / CAD / Fab</div>
+      <div class="sg-items">
+        <span class="sg-item">KiCad PCB Design</span>
+        <span class="sg-item">Onshape</span>
+        <span class="sg-item">DraftSight</span>
+        <span class="sg-item">AutoCAD</span>
+        <span class="sg-item">3D Printing</span>
+        <span class="sg-item">Panel Fabrication</span>
+        <span class="sg-item">Soldering</span>
+        <span class="sg-item">LabVIEW</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JARVIS -->
+<section id="jarvis">
+  <div class="fade-in">
+    <div class="section-eyebrow">// 05 — Personal AI</div>
+  </div>
+  <div class="jarvis-inner fade-in">
+    <div class="jarvis-visual">
+      <div class="jarvis-ring">
+        <div class="jarvis-core">AI</div>
+      </div>
+    </div>
+    <div class="jarvis-text">
+      <h2 class="section-title">I Built My Own<br>AI Assistant</h2>
+      <p><strong>J.A.R.V.I.S.</strong> is a low-latency, privacy-focused voice assistant I built to run as a Linux system daemon on my own hardware — no cloud, no API key, no data leaving my machine.</p>
+      <p>Using <strong>Ollama</strong> for local language model orchestration and small language model (SLM) inference, I architected a full voice pipeline with wake word detection, real-time speech processing, and response generation — all running locally with systemd service management.</p>
+      <p>This isn't a wrapper around ChatGPT. It's a from-scratch local AI system — which means I understand what's happening at every layer of the stack. That's the kind of AI thinking I want to bring into engineering environments.</p>
+      <div class="jarvis-stack">
+        <span class="jarvis-chip">Ollama</span>
+        <span class="jarvis-chip">Python</span>
+        <span class="jarvis-chip">Linux Daemon</span>
+        <span class="jarvis-chip">Local LLM</span>
+        <span class="jarvis-chip">systemd</span>
+        <span class="jarvis-chip">Shell Scripting</span>
+        <span class="jarvis-chip">SLM Inference</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner fade-in">
+    <div class="section-eyebrow">// 06 — Let's Talk</div>
+    <h2 class="section-title">Open to Full-Time Roles</h2>
+    <p class="section-sub">Graduating May 2027. Looking for full-time roles in robotics, industrial automation, or embedded systems engineering — especially where AI and physical systems intersect.</p>
+    <div class="contact-links">
+      <a href="mailto:JoshuaHaines@letu.edu" class="contact-link">📧 JoshuaHaines@letu.edu</a>
+      <a href="https://linkedin.com/in/joshuastephenhaines" target="_blank" class="contact-link">💼 LinkedIn</a>
+      <a href="tel:5127051922" class="contact-link">📱 (512) 705-1922</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Joshua Haines · Mechatronics Engineering · LeTourneau University · May 2027</span>
+  <span style="color:var(--teal)">// Built with precision</span>
+</footer>
+
+<!-- CHAT FAB -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()" title="Ask Joshua anything">💬</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <div class="chat-avatar">🤖</div>
+    <div class="chat-header-text">
+      <h4>Ask about Joshua</h4>
+      <p>AI-powered · Answers about his work & projects</p>
+    </div>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg bot"><div class="msg-bubble">Hey! I can answer questions about Joshua's projects, skills, and experience. What would you like to know?</div></div>
+  </div>
+  <div class="chat-suggestions" id="suggestions">
+    <button class="suggestion" onclick="askQuestion('What is the MineYourStep robot?')">MineYourStep robot?</button>
+    <button class="suggestion" onclick="askQuestion('What has Joshua done at Linestar?')">Linestar experience?</button>
+    <button class="suggestion" onclick="askQuestion('Tell me about J.A.R.V.I.S.')">J.A.R.V.I.S.?</button>
+    <button class="suggestion" onclick="askQuestion('What is Joshua looking for in a job?')">Job goals?</button>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Ask about Joshua..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()">→</button>
+  </div>
+  <div class="chat-note">⚡ Powered by Claude · Add your Anthropic API key to activate</div>
+</div>
+
+<script>
+/* ── CIRCUIT CANVAS ──────────────────────────────────────────── */
+(function(){
+  const c = document.getElementById('circuit');
+  const ctx = c.getContext('2d');
+  let W, H, nodes = [], animFrame;
+
+  function resize(){
+    W = c.width = c.offsetWidth;
+    H = c.height = c.offsetHeight;
+    buildNodes();
+  }
+
+  function buildNodes(){
+    nodes = [];
+    const cols = Math.ceil(W/80), rows = Math.ceil(H/80);
+    for(let r=0;r<=rows;r++) for(let c2=0;c2<=cols;c2++){
+      if(Math.random()<.35) nodes.push({
+        x: c2*80 + (Math.random()-.5)*30,
+        y: r*80 + (Math.random()-.5)*30,
+        r: Math.random()*2+1,
+        pulse: Math.random()*Math.PI*2,
+        speed: .008+Math.random()*.012
+      });
+    }
+  }
+
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    const teal = '#00C9BB';
+    // Draw connections
+    ctx.strokeStyle = teal;
+    ctx.lineWidth = .4;
+    nodes.forEach((n,i)=>{
+      nodes.slice(i+1).forEach(m=>{
+        const d = Math.hypot(n.x-m.x, n.y-m.y);
+        if(d<120){
+          ctx.globalAlpha = (1-d/120)*.3;
+          ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(m.x,m.y); ctx.stroke();
+        }
+      });
+    });
+    // Draw nodes
+    nodes.forEach(n=>{
+      n.pulse += n.speed;
+      const a = .3+.2*Math.sin(n.pulse);
+      ctx.globalAlpha = a;
+      ctx.fillStyle = teal;
+      ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    animFrame = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+})();
+
+/* ── SCROLL REVEAL ───────────────────────────────────────────── */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.12});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+/* ── CHAT ────────────────────────────────────────────────────── */
+let chatOpen = false;
+const CONTEXT = `You are an AI assistant embedded on Joshua Haines's engineering portfolio website. Answer questions about Joshua only. Here is Joshua's background:
+
+Joshua Haines is a Mechatronics, Robotics & Automation Engineering student at LeTourneau University (Longview, TX), graduating May 2027 with a 3.57 GPA and a Presidential Scholarship.
+
+LINESTAR AUTOMATION (May 2024 – Present, recurring intern 3 summers + 2 winters):
+- Summer 2026: Beckhoff TwinCAT3 PLC/HMI development, WLED control via JSON API/UDP, Maple Systems EBPro HMI, safety schematics (light curtains, safety relays), motor torque/inertia calculations for Beckhoff servo selection, Rockwell 755T research
+- Summer 2025: Confidential R&D project — CAN bus / J1939 reverse engineering, prototypes, 6 technical reports, wiring schematics from scratch, BOMs, RFQs
+- Winter 2024-25: HIWIN motion control, EtherCAT (CoE/MoE) research, RedLion Crimson, panel fabrication
+- Summer 2024: UR3e robotic DMM testing systems for Trescal, Teknic ClearCore motor control demo in C++, NDA panel wiring projects
+
+SCHOOL PROJECTS:
+- Verso Motor Project (Junior Design I & II, Fall 2025 – Spring 2026): Industry-sponsored for MµZ Motion LLC, 10-person team, electrical sub-team, custom test fixtures, Python data automation, proprietary IP
+- MineYourStep Autonomous Robot (Spring 2026): 4-wheel fully autonomous mine-detection robot, ESP32 state machine, induction-balance metal sensing, dual-coil triangulation, all firmware authored by Joshua
+- FPGA Arcade Console (Spring 2025): Xilinx Basys 3, VHDL, KiCad PCB, laser-cut enclosure (~80 hrs VHDL as lead programmer)
+- R12-6 Six-Axis Robot Arm (Spring 2026): Stäubli-style arm, sensor-guided pick & place, kinematic math, Webots simulation
+- PID-Controlled Vehicle (Fall 2025): Arduino, Hall-effect tachometer, PID with anti-windup
+- Arduino Laser Tag System (2024): IR detection, C++ game logic, circuit design
+
+PERSONAL PROJECTS:
+- J.A.R.V.I.S.: Local AI voice assistant daemon on Linux using Ollama, zero cloud dependency, systemd service management
+- Motorized Shoe: ESP32, 6S battery, belt/pulley drivetrain, dual-spring suspension, Onshape CAD
+- Articulated Iron Man MK5 Helmet: Arduino servos, 10 moving segments, LED eyes
+
+SKILLS: Universal Robots UR3e, EPSON VT6, Stäubli R12-6, Beckhoff TwinCAT3, Structured Text, HIWIN, Teknic ClearCore, ESP32, Arduino, ARM Cortex-M0+, FPGA/VHDL, KiCad, J1939 CAN Bus, EtherCAT, Python, C/C++, MATLAB, Ollama, Onshape, 3D Printing, LabVIEW, RoboDK, Webots
+
+CERTIFICATIONS: UR e-Series Core Track, UR e-Series Pro Track, Presidential Scholar, Fall 2023 President's List
+
+JOB GOALS: Seeking full-time roles in robotics, industrial automation, or embedded systems engineering where AI and physical systems intersect. Available May 2027. Based in Leander, TX. Email: JoshuaHaines@letu.edu`;
+
+function toggleChat(){
+  chatOpen = !chatOpen;
+  document.getElementById('chatPanel').classList.toggle('open', chatOpen);
+  document.getElementById('chatFab').textContent = chatOpen ? '✕' : '💬';
+}
+
+function askQuestion(q){
+  document.getElementById('chatInput').value = q;
+  sendChat();
+}
+
+async function sendChat(){
+  const input = document.getElementById('chatInput');
+  const msgs = document.getElementById('chatMessages');
+  const sugg = document.getElementById('suggestions');
+  const q = input.value.trim();
+  if(!q) return;
+  input.value = '';
+  sugg.style.display = 'none';
+
+  // User bubble
+  msgs.innerHTML += `<div class="msg user"><div class="msg-bubble">${escHtml(q)}</div></div>`;
+
+  // Typing indicator
+  const typingId = 'typing_'+Date.now();
+  msgs.innerHTML += `<div class="msg bot" id="${typingId}"><div class="msg-bubble"><span class="typing-dot">•</span><span class="typing-dot">•</span><span class="typing-dot">•</span></div></div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+
+  // Check for API key
+  const apiKey = window.ANTHROPIC_API_KEY || '';
+  if(!apiKey){
+    document.getElementById(typingId).outerHTML = `<div class="msg bot"><div class="msg-bubble">To activate live AI responses, add your Anthropic API key. For now, I can tell you that Joshua is a mechatronics engineer who built an autonomous mine-detection robot, programmed six-axis robot arms, and built his own local AI assistant. Check the sections above for full details! 🚀</div></div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+    return;
+  }
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6', max_tokens:400,
+        system: CONTEXT,
+        messages:[{role:'user',content:q}]
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Sorry, I had trouble with that.';
+    document.getElementById(typingId).outerHTML = `<div class="msg bot"><div class="msg-bubble">${escHtml(reply)}</div></div>`;
+  } catch(e) {
+    document.getElementById(typingId).outerHTML = `<div class="msg bot"><div class="msg-bubble">Something went wrong. Check the console for details.</div></div>`;
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function downloadResume(e){
+  e.preventDefault();
+  alert("📄 Resume available — place 'Joshua_Haines_Resume.docx' in the same folder as this file and update this link to point to it.");
+}
+
+// Close chat on outside click
+document.addEventListener('click', e=>{
+  if(chatOpen && !document.getElementById('chatPanel').contains(e.target) && e.target.id!=='chatFab'){
+    toggleChat();
+  }
+});
+</script>
+</body>
+</html>
