@@ -343,6 +343,23 @@ section { padding: 6rem 3rem; }
   transition: all .2s; animation: fabPop 1s 2s ease both;
 }
 .chat-fab:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(0,201,187,.5); }
+.chat-fab-label {
+  position: fixed; bottom: 4.6rem; right: 1.4rem; z-index: 200;
+  background: rgba(13,20,35,.95); border: 1px solid var(--teal);
+  color: var(--white); font-size: .78rem; font-weight: 600;
+  padding: .5rem .85rem; border-radius: 10px; white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,201,187,.25);
+  animation: fabPop 1s 2s ease both, labelFloat 2.6s 3s ease-in-out infinite;
+  pointer-events: none;
+}
+.chat-fab-label::after {
+  content: ''; position: absolute; bottom: -6px; right: 22px;
+  width: 12px; height: 12px; background: rgba(13,20,35,.95);
+  border-right: 1px solid var(--teal); border-bottom: 1px solid var(--teal);
+  transform: rotate(45deg);
+}
+.chat-fab-label.hidden { display: none; }
+@keyframes labelFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 .chat-panel {
   position: fixed; bottom: 6rem; right: 2rem; z-index: 200;
   width: 360px; max-height: 520px;
@@ -893,6 +910,7 @@ canvas#circuit { position: absolute; inset: 0; width: 100%; height: 100%; }
 </footer>
 
 <!-- CHAT FAB -->
+<div class="chat-fab-label" id="chatFabLabel">💬 Ask J.A.R.V.I.S. about Joshua</div>
 <button class="chat-fab" id="chatFab" onclick="toggleChat()" title="Ask Joshua anything">💬</button>
 <div class="chat-panel" id="chatPanel">
   <div class="chat-header">
@@ -1020,6 +1038,7 @@ function toggleChat(){
   chatOpen = !chatOpen;
   document.getElementById('chatPanel').classList.toggle('open', chatOpen);
   document.getElementById('chatFab').textContent = chatOpen ? '✕' : '💬';
+  document.getElementById('chatFabLabel').classList.toggle('hidden', chatOpen);
 }
 
 function askQuestion(q){
