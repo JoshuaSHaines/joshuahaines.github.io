@@ -1068,6 +1068,39 @@ function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace
 let voiceOutputOn = false;
 let recognition = null;
 let listening = false;
+let jarvisVoice = null;
+
+/* Prefer deep, calm, "assistant"-style system voices, roughly in this order.
+   Browsers expose different voice sets, so we try several known good ones. */
+const VOICE_PREFERENCE = [
+  'Daniel',            // macOS/iOS — crisp British male, closest free match
+  'Arthur',            // macOS — deep British male
+  'Google UK English Male',
+  'Microsoft Ryan Online (Natural) - English (United Kingdom)',
+  'Microsoft George - English (United Kingdom)',
+  'Microsoft David - English (United States)',
+  'Google US English'
+];
+
+function pickJarvisVoice(){
+  const voices = window.speechSynthesis.getVoices();
+  if(!voices.length) return null;
+  for(const name of VOICE_PREFERENCE){
+    const match = voices.find(v => v.name === name);
+    if(match) return match;
+  }
+  // Fallback: any English male-sounding voice
+  const enMale = voices.find(v => /en-GB|en-US/.test(v.lang) && /male/i.test(v.name));
+  if(enMale) return enMale;
+  // Last resort: first English voice available
+  return voices.find(v => /^en/.test(v.lang)) || voices[0];
+}
+
+// Voice list loads async in some browsers
+if('speechSynthesis' in window){
+  window.speechSynthesis.onvoiceschanged = () => { jarvisVoice = pickJarvisVoice(); };
+  jarvisVoice = pickJarvisVoice();
+}
 
 function toggleVoiceOutput(){
   voiceOutputOn = !voiceOutputOn;
@@ -1079,8 +1112,11 @@ function speakText(text){
   if(!voiceOutputOn || !('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(text);
-  utter.rate = 1.0;
-  utter.pitch = 0.9;
+  if(!jarvisVoice) jarvisVoice = pickJarvisVoice();
+  if(jarvisVoice) utter.voice = jarvisVoice;
+  utter.rate = 0.95;   // slightly measured, not rushed
+  utter.pitch = 0.75;  // deeper, calmer register
+  utter.volume = 1.0;
   window.speechSynthesis.speak(utter);
 }
 
